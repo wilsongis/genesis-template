@@ -1,0 +1,5 @@
+# Add to .gitignore if not present:
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
