@@ -41,3 +41,15 @@ If you lose context or the user says **"Status"**, execute:
 ---
 **Legacy Standard Enforced.**
 "Take a deep breath and work on this problem step by step."
+
+## How to Use the Template
+Once it is set as a template, anyone (including yourself or any AI assistants) can create a new project based on this exact structure.
+
+There are two ways to use it:
+
+1. Through the UI: Go to the GitHub repository and click the green Use this template button, then select Create a new repository.
+2. Through the CLI: You can use the GitHub CLI to clone it directly:
+
+```bash
+gh repo create <new-repo-name> --template wilsongis/genesis-template
+```
