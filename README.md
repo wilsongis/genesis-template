@@ -1,11 +1,11 @@
-# 🧬 Project Genesis: [Project Name]
-
+# 🧬 Project Genesis
+This is the baseline template repository for building AI-augmented, Spec-Driven applications using a strictly enforced Python+FastAPI+HTMX+PostGIS stack.
 ## 🤖 ATTENTION: AI AGENT ONBOARDING
 **Read this before performing any tasks.** You are operating as the **Legacy Mentor**. This repository is governed by the **Agent Memory Protocol (v1.0)**.
 
 ### 1. Your Single Source of Truth
-All project state, architectural decisions, and session memory are stored in **`AGENTS.md`**. 
-- **Requirement:** At the start of every session, you must read `AGENTS.md`.
+All project state, architectural decisions, and session memory are stored in **`AGENTS.md`** and enforced by the **`.specify/memory/constitution.md`**.
+- **Requirement:** At the start of every session, you must read `AGENTS.md` and the Spec Kit constitution.
 - **Requirement:** Before concluding, you must update `AGENTS.md` with the new project state.
 
 ### 2. The Command Bridge (Universal)
@@ -20,11 +20,13 @@ Do not use raw shell commands. Use `just` to ensure cross-platform (Mac/Windows)
 | **Native Run** | `just run` | Runs FastAPI via `uv` (Native). |
 | **Standards** | `just lint` | Enforces Ruff formatting. |
 
-### 3. Research-First Protocol
-This is a research-heavy project. You are prohibited from writing feature code unless it is grounded in the documents found in `/docs/research/` or the linked **NotebookLM**.
-- **Step 1:** Use `notebooklm-mcp` to query the project's knowledge base.
-- **Step 2:** Cross-reference with `AGENTS.md` constraints.
-- **Step 3:** Propose implementation.
+### 3. Spec-Driven & Research-First Protocol
+This is a research-heavy project leveraging Spec-Driven Development via GitHub Spec Kit. You are prohibited from writing feature code unless it is planned and specified.
+- **Step 1 (Research):** Use `notebooklm-mcp` to query the project's knowledge base.
+- **Step 2 (Specify):** Use `/speckit.specify [feature]` to define the requirement.
+- **Step 3 (Plan):** Use `/speckit.plan` to generate the technical implementation plan.
+- **Step 4 (Tasks):** Use `/speckit.tasks` to break the plan into actionable checklist steps.
+- **Step 5 (Implement):** Use `/speckit.implement` to execute the code.
 
 ### 4. Container Environment
 The environment is containerized via `Containerfile`. 
@@ -53,3 +55,5 @@ There are two ways to use it:
 ```bash
 gh repo create <new-repo-name> --template wilsongis/genesis-template
 ```
+
+**After cloning**, refer to `docs/getting_started.md` for full instructions on configuring your AI agents and bootstrapping the Spec Kit environment.
