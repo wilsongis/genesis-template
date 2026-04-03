@@ -6,9 +6,15 @@ Project Genesis uses a **Spec-Driven Development** approach powered by GitHub's 
 
 Before initializing the AI agents, ensure you have the following installed on your system:
 - **Python 3.12+** (Managed via [`uv`](https://github.com/astral-sh/uv))
-- **[Just](https://github.com/casey/just)* (Command runner)
+- **[Just](https://github.com/casey/just)** (Command runner)
 - **Podman/Docker** (For the containerized environment & PostGIS)
 - **Git**
+- **Cargo** (Rust package manager, via [rustup](https://rustup.rs/))
+  - Mac/Linux: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+  - Windows: Download and run `rustup-init.exe` from the [rustup site](https://rustup.rs/)
+- **cargo-binstall** (Required for installing MCP servers like just-mcp)
+  - Mac/Linux: `curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash`
+  - Windows: `Set-ExecutionPolicy Unrestricted -Scope Process; iex (iwr "https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.ps1").Content`
 
 ## 2. Install Specify CLI
 

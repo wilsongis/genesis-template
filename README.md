@@ -57,3 +57,139 @@ gh repo create <new-repo-name> --template wilsongis/genesis-template
 ```
 
 **After cloning**, refer to `docs/getting_started.md` for full instructions on configuring your AI agents and bootstrapping the Spec Kit environment.
+
+## Architectural Blueprint for High-Efficiency, Long-Horizon AI Coding Agents
+
+### Executive Analysis
+The rapid maturation of large language models has fundamentally disrupted traditional software engineering paradigms, enabling the deployment of autonomous coding agents capable of reasoning, planning, and executing complex development tasks. Within this paradigm shift, spec-driven development methodologies have emerged as the premier operational framework for translating high-level architectural intent into verified, production-ready code.
+
+To resolve systemic vulnerabilities like context rot and token bloat—and to construct a highly specialized orchestration system tailored to support an authoritative, standard-enforcing persona such as the "Legacy Mentor"—the architecture must transition from prompt engineering to advanced context engineering. This transition necessitates the offloading of deterministic verification tasks to command-line interfaces via the Model Context Protocol (MCP) and the adoption of hierarchical, state-driven orchestration techniques.
+
+The following document has been structured as a definitive, step-by-step implementation guide. It provides the exact instructions required to transform a standard Visual Studio Code environment into a highly optimized, hybrid agentic IDE utilizing Roo Code, the advanced Gemini 3.1 Pro API, the Spec-Kit methodology, and MCP tool offloading to enforce a strict Python/FastAPI/HTMX stack.
+
+### Phase 1: IDE Setup and Gemini 3.1 Pro Integration
+To manage massive codebases economically without sacrificing reasoning capability, we will power the orchestration layer with Google's latest Gemini 3.1 Pro Preview model. This model features a 1M-token context window and has been explicitly optimized for agentic coding, precise tool usage, and reliable multi-step execution across complex workflows.
+
+**Step 1: Obtain API Credentials**
+1. Navigate to Google AI Studio.
+2. Sign in with your Google account and select "Get API key" from the left-hand menu to generate your credentials.
+
+**Step 2: Install and Configure Roo Code in VS Code**
+1. Open Visual Studio Code and install the Roo Code extension from the Marketplace.
+2. Click the gear icon inside the Roo Code panel to open Settings.
+3. Set the API Provider to "Google Gemini".
+4. Paste your API key into the "Gemini API Key" field.
+5. Under the "Model" dropdown, select `gemini-3.1-pro-preview`. For smaller, faster validation tasks, you can utilize the highly cost-efficient Gemini 3.1 Flash-Lite model.
+6. Enable the "URL Context" and "Google Search Grounding" options to grant the agent real-time documentation retrieval capabilities.
+
+### Phase 2: Project Governance and The "Legacy Mentor" Persona
+Instead of relying on basic system prompts, you will enforce your strict tech stack (FastAPI, PostgreSQL, HTMX, Tailwind) by injecting your "Legacy Mentor" persona directly into Roo Code's Custom Modes and grounding it with local repository instructions.
+
+**Step 1: Define the Custom Mode (.roomodes)**
+At the root of your workspace, create a file named `.roomodes` (Roo Code reads both JSON and YAML formats for this file). This gives your agent a dedicated personality and strict operational boundaries.
+
+```yaml
+customModes:
+  - slug: "legacy-mentor"
+    name: "🏛️ Legacy Mentor"
+    roleDefinition: "You are the Legacy Mentor and Standards Enforcer. You are a Senior Full-Stack Developer on the verge of retirement. Your goal is to audit codebase compliance and rewrite documentation to ensure consistency for Junior Student Developers."
+    customInstructions: "Strictly enforce the Global Tech Stack: Jinja2, HTMX, Tailwind CSS, Python 3.x, FastAPI, PostgreSQL, Pytest, Ruff, and UV. If the code deviates, correct it. Never allow hard-coded environment variables. Always use the 'attempt_completion' tool when a task is finished."
+    groups:
+      - "read"
+      - "edit"
+      - "browser"
+      - "command"
+      - "mcp"
+    source: "project"
+```
+
+**Step 2: Establish the Local AGENTS.md**
+Create an `AGENTS.md` file at the root of your project. Roo Code will automatically read this file to understand the specific tech stack and routing constraints of the current repository, ensuring the Legacy Mentor doesn't hallucinate Python patterns if you temporarily switch to a JavaScript project.
+
+### Phase 3: Integrating Spec-Kit for Deterministic Planning
+Spec-Kit forces the agent to document its architectural plan before modifying source files, preventing goal drift. We will install the Spec-Kit CLI to utilize its markdown templates within Roo Code.
+
+**Step 1: Install the Specify CLI via uv**
+Open your terminal and use `uv` (your mandated package manager) to install the CLI tool:
+
+```bash
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+```
+
+**Step 2: Initialize the Project**
+Navigate to your project folder and run:
+
+```bash
+specify init
+```
+This generates a `.specify` folder containing document templates for specifications, technical plans, and task breakdowns.
+
+**Step 3: Execute the Slash Command Workflow**
+Within the Roo Code chat interface, you can now orchestrate the planning phase using Spec-Kit's built-in slash commands:
+- Type `/speckit.specify` to have the Legacy Mentor draft the initial feature requirements.
+- Type `/speckit.plan` to generate the technical architecture design enforcing FastAPI and HTMX.
+- Type `/speckit.tasks` to break the plan down into highly granular implementation steps.
+
+### Phase 4: CLI Offloading via Model Context Protocol (MCP)
+To prevent terminal noise (like ANSI escape codes and progress bars) from burning through your tokens and causing context rot, you must offload deterministic executions (linting, testing) to MCP servers. MCP servers intercept terminal commands and return clean, structured JSON to Roo Code.
+
+**Prerequisites: Cargo and cargo-binstall**
+Before installing `just-mcp`, ensure you have Cargo and `cargo-binstall` installed:
+- **Cargo (via rustup):**
+  - Mac/Linux: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+  - Windows: Download from [rustup.rs](https://rustup.rs/)
+- **cargo-binstall:**
+  - Mac/Linux: `curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash`
+  - Windows (PowerShell): `Set-ExecutionPolicy Unrestricted -Scope Process; iex (iwr "https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.ps1").Content`
+
+**Step 1: Install the Justfile MCP Server**
+Your Global Tech Stack relies on `just` as the command runner. We will install `just-mcp` so Roo Code can execute your recipes dynamically.
+
+```bash
+cargo binstall --git https://github.com/toolprint/just-mcp just-mcp
+```
+
+**Step 2: Install the Ruff MCP Server**
+To enforce your linting standards without utilizing generative tokens, install the Ruff MCP Server.
+
+```bash
+uvx ruff-mcp-server
+```
+
+**Step 3: Configure MCP in VS Code**
+Open Roo Code's MCP server configuration (via the UI or `.vscode/cline_mcp.json`) and register your newly installed servers:
+
+```json
+{
+  "mcpServers": {
+    "just": {
+      "command": "just-mcp",
+      "args": ["-w", "/path/to/your/project"]
+    },
+    "ruff": {
+      "command": "uvx",
+      "args": ["ruff-mcp-server"]
+    }
+  }
+}
+```
+
+### Phase 5: The Daily Workflow (Boomerang Tasks)
+With the IDE fully configured, you can now execute large-scale, long-horizon coding operations without suffering from context rot.
+
+**Step 1: Start the Orchestrator**
+Switch Roo Code into the default Orchestrator mode (or simply begin interacting with your Legacy Mentor mode).
+
+**Step 2: Provide the Objective**
+Instruct the agent to implement the tasks generated by `/speckit.tasks`.
+
+**Step 3: Context Isolation via Boomerang Tasks**
+As Roo Code analyzes the task list, it will automatically utilize its Boomerang Tasks feature to prevent memory bloat.
+1. The main orchestrator pauses and dispatches a highly focused sub-task into a completely isolated context window.
+2. The sub-agent writes the code (e.g., a FastAPI route).
+3. The sub-agent invokes the `just test-backend` recipe via the MCP server. It receives a clean JSON response indicating success or failure.
+4. If the tests fail, the sub-agent iterates within its quarantine window.
+5. Upon success, the sub-agent invokes `ruff` via MCP to fix formatting.
+6. The sub-agent closes, passing only a brief summary of the completed work back to the main Legacy Mentor orchestrator.
+
+By executing tasks in these isolated Boomerang loops and offloading all syntax/testing verification to MCP servers, your Gemini 3.1 Pro context window remains pristine. The Legacy Mentor will maintain absolute focus on your overarching architectural goals, enforcing your tech stack flawlessly across the entire development lifecycle.

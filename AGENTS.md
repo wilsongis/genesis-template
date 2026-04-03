@@ -40,9 +40,9 @@
 | `/speckit.tasks` | **Create Tasks** | AI Agent | Breaks plan into independent executing tasks. |
 
 ## 5. Active Context & Todo
-- [x] Initialize repository from Genesis template
+- [ ] Initialize repository from Genesis template
 - [ ] Connect NotebookLM ID
-- [x] Define initial SRS (Software Requirements Specification)
+- [ ] Define initial SRS (Software Requirements Specification)
 
 ---
 ⏱️ **State:** Verified | 🧠 **Memory:** Fresh | 🛠️ **Platform:** Universal
