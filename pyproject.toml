@@ -9,4 +9,5 @@ dependencies = [
     "psycopg2-binary",
     "geoalchemy2",
     "pytest",
+    "mempalace>=3.3.1",
 ]

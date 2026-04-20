@@ -40,6 +40,26 @@ If you lose context or the user says **"Status"**, execute:
 2. `ls docs/research`
 3. Summarize the next steps from the `## Active Context` section of `AGENTS.md`.
 
+### 6. MemPalace Integration
+This project integrates with MemPalace for advanced knowledge management and context preservation. MemPalace serves as the persistent memory layer that maintains architectural decisions, research findings, and implementation details across development sessions.
+
+- **Knowledge Management**: All project decisions and research artifacts are stored in MemPalace for long-term retention.
+- **Context Preservation**: MemPalace ensures that AI agents maintain context across multiple development sessions.
+- **Cross-Reference Capabilities**: Code implementations are connected to relevant research and decisions via MemPalace tunnels.
+
+**MemPalace Commands**:
+- `just research-sync` - Synchronizes local research with MemPalace
+- `just research-test` - Tests MemPalace connection
+- `just research-serve` - Starts MemPalace MCP server
+- `just research-open` - Opens the MemPalace notebook in browser
+
+**MemPalace MCP Tools**:
+- `mcp--mempalace--mempalace_status` - Check MemPalace status
+- `mcp--mempalace--mempalace_list_wings` - List all wings
+- `mcp--mempalace--mempalace_list_rooms` - List rooms in a wing
+- `mcp--mempalace--mempalace_search` - Search for specific content
+- `mcp--mempalace--mempalace_follow_tunnels` - Follow tunnels from a room
+
 ---
 **Legacy Standard Enforced.**
 "Take a deep breath and work on this problem step by step."

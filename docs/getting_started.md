@@ -26,7 +26,7 @@ uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 
 ## 3. Configure Your Project
 
-Once your repository is cloned from the Genesis template, you must initialize the Specify environment and configure your preferred AI agents. 
+Once your repository is cloned from the Genesis template, you must initialize the Specify environment and configure your preferred AI agents.
 
 Run the initialization commands for the agents you intend to use. Specify CLI will create the `.specify/` core configuration and link the specific command files for your agents.
 
@@ -50,17 +50,40 @@ specify init . --here --ai opencode --script sh
 
 The behavioral rules for Genesis are governed by the project context. Ensure the following files have been correctly set up:
 
-1. **`AGENTS.md`**: This is your single source of truth for the Agent Memory Protocol. 
+1. **`AGENTS.md`**: This is your single source of truth for the Agent Memory Protocol.
    - **Notebook ID**: Update the `Notebook ID` value in `AGENTS.md` to map to your specific AntiGravity/NotebookLM MCP instance.
    - **Objective**: Ensure the project objective is clearly defined at the top of the file.
 2. **`.specify/memory/constitution.md`**: This is the compiled constitution that Specify CLI agents read from. If you update `AGENTS.md`, you should use the `/speckit.constitution` command (in your agent of choice) to ensure the Spec Kit template rules are synced with `AGENTS.md`.
 
-## 5. The Spec-Driven Workflow
+## 5. MemPalace Integration
+
+Project Genesis integrates with MemPalace as its persistent knowledge management system for architectural decisions, research artifacts, and codebase context. MemPalace ensures that AI agents maintain context across sessions and reference past decisions for consistency.
+
+**MemPalace Workflow**:
+1. **READ**: Always read `AGENTS.md` and `.specify/memory/constitution.md` before starting a task
+2. **EXECUTE**: Work on the objective using Spec-Driven Development
+3. **WRITE**: Update `AGENTS.md` with new knowledge before ending the task
+4. **SYNC**: Run `just research-sync` to push research artifacts to MemPalace
+
+**Key MemPalace Commands**:
+- `just research-sync` - Synchronizes `/docs/research` with MemPalace
+- `just research-test` - Verifies MemPalace connection
+- `just research-serve` - Starts the MemPalace MCP server
+- `just research-open` - Opens the MemPalace notebook in your browser
+
+**MCP Tools**:
+- `mcp--mempalace--mempalace_status` - Check MemPalace status
+- `mcp--mempalace--mempalace_list_wings` - List all wings
+- `mcp--mempalace--mempalace_list_rooms` - List rooms in a wing
+- `mcp--mempalace--mempalace_search` - Search for specific content
+- `mcp--mempalace--mempalace_follow_tunnels` - Follow tunnels from a room
+
+## 6. The Spec-Driven Workflow
 
 Whenever you develop a new feature for Project Genesis, you must follow the Spec-Driven Development lifecycle. Access these commands using your configured AI agent (e.g., via chat in Copilot, `/` commands in Claude Code, etc.):
 
 1. **Research & Sync Knowledge**: Run `just research-sync` to ensure your Dev notebook has the latest domain knowledge.
-2. **`/speckit.specify [feature]`**: Generate the initial requirement specification (`specs/[feature]/spec.md`) based on your business logic. 
+2. **`/speckit.specify [feature]`**: Generate the initial requirement specification (`specs/[feature]/spec.md`) based on your business logic.
 3. **`/speckit.plan`**: Generate the technical implementation plan (`specs/[feature]/plan.md`) to map the spec against the Genesis Constitution (FastAPI, HTMX, Tailwind, PostGIS).
 4. **`/speckit.tasks`**: Break the plan down into actionable, sequential steps (`specs/[feature]/tasks.md`).
 5. **`/speckit.implement`**: Execute the tasks one by one.

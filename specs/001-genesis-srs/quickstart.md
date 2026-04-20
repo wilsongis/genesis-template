@@ -31,7 +31,17 @@ specify init . --here --ai copilot --script sh
 
 Make sure you update `AGENTS.md` with your specific NotebookLM ID if you are using the NotebookLM MCP.
 
-## 4. Running the Application
+## 4. MemPalace Integration
+
+Project Genesis integrates with MemPalace for persistent knowledge management. This ensures that architectural decisions, research findings, and implementation details are preserved across development sessions.
+
+**MemPalace Commands**:
+- `just research-sync` - Synchronizes local research with MemPalace
+- `just research-test` - Tests MemPalace connection
+- `just research-serve` - Starts MemPalace MCP server
+- `just research-open` - Opens the MemPalace notebook in browser
+
+## 5. Running the Application
 
 You have two choices for running the app locally:
 
@@ -47,7 +57,7 @@ just start
 ```
 *Note: This builds and spins up the full Podman stack, including the PostGIS database.*
 
-## 5. Development Workflow
+## 6. Development Workflow
 
 Never make random code changes. Follow the Spec-Driven workflow using your AI agent:
 
